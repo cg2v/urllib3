@@ -98,6 +98,7 @@ class HTTPConnection(_HTTPConnection, object):
         if self._tunnel_host:
             # TODO: Fix tunnel so it doesn't depend on self.sock state.
             self._tunnel()
+            self.auto_open = 0
 
     def connect(self):
         conn = self._new_conn()
@@ -175,6 +176,7 @@ class VerifiedHTTPSConnection(HTTPSConnection):
             # Calls self._set_hostport(), so self.host is
             # self._tunnel_host below.
             self._tunnel()
+            self.auto_open = 0
 
         # Wrap socket using verification with the root certs in
         # trusted_root_certs

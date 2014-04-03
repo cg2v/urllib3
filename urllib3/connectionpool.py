@@ -213,6 +213,8 @@ class HTTPConnectionPool(ConnectionPool, RequestMethods):
         if conn and is_connection_dropped(conn):
             log.info("Resetting dropped connection: %s" % self.host)
             conn.close()
+            if conn.auto_open == 0:
+                conn = None
 
         return conn or self._new_conn()
 
